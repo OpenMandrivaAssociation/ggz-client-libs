@@ -1,11 +1,14 @@
 %define version 0.0.14
-%define release %mkrel 2
+%define release %mkrel 3
 
-%define modlibname %mklibname ggzmod 4
-%define corelibname %mklibname ggzcore 9
+%define mod_major 4
+%define core_major 9
+
+%define modlibname %mklibname ggzmod %{mod_major}
+%define corelibname %mklibname ggzcore %{core_major}
 
 %define libggz_version %{version}
-%define lib_name        %mklibname %{name} 9
+%define lib_name        %mklibname %{name} %{core_major}
 
 Name:		ggz-client-libs
 Summary:	GGZ Client Libraries
@@ -110,33 +113,35 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc AUTHORS COPYING NEWS README QuickStart.GGZ README.GGZ
 %config(noreplace) %{_sysconfdir}/ggz.modules
+%{_sysconfdir}/xdg/menus/ggz.menu
+%{_sysconfdir}/xdg/menus/applications-merged/ggz.merge.menu
 %{_bindir}/ggz-wrapper
 %{_bindir}/ggz
-%{_mandir}/man1/*
-%{_mandir}/man5/*
-%{_mandir}/man6/*
-%{_mandir}/man7/*
 %dir %{_libexecdir}/ggz
 %dir %{_libexecdir}/ggz/ggzwrap
 %dir %{_datadir}/ggz
 %dir %{_datadir}/ggz/ggz-config
 %dir %{_datadir}/ggz/pixmaps
 %dir %{_datadir}/locale/de/LC_MESSAGES/*
-%{_sysconfdir}/xdg/menus/ggz.menu
-%{_sysconfdir}/xdg/menus/applications-merged/ggz.merge.menu
 %{_datadir}/desktop-directories/ggz-games.directory
 %{_datadir}/desktop-directories/ggz.directory
 %{_datadir}/locale/de/LC_MESSAGES/ggz-config.mo
-
+%{_mandir}/man1/*
+%{_mandir}/man5/*
+%{_mandir}/man6/*
+%{_mandir}/man7/*
 
 
 %files -n %{modlibname}
 %defattr(-,root,root)
-%{_libdir}/libggzmod.so.*
+%{_libdir}/libggzmod.so.%{mod_major}
+%{_libdir}/libggzmod.so.%{mod_major}.*
+
 
 %files -n %{corelibname}
 %defattr(-,root,root)
-%{_libdir}/libggzcore.so.*
+%{_libdir}/libggzcore.so.%{core_major}
+%{_libdir}/libggzcore.so.%{core_major}.*
 
 %files -n %{lib_name}-devel
 %defattr(-,root,root)
