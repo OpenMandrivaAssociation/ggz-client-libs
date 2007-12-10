@@ -1,5 +1,5 @@
 %define version 0.0.14
-%define release %mkrel 3
+%define release %mkrel 4
 
 %define mod_major 4
 %define core_major 9
@@ -9,6 +9,7 @@
 
 %define libggz_version %{version}
 %define lib_name        %mklibname %{name} %{core_major}
+%define develname %mklibname -d %name
 
 Name:		ggz-client-libs
 Summary:	GGZ Client Libraries
@@ -61,15 +62,16 @@ This package contains library that contains core functions needed
 by all GGZ clients.
 
 
-%package -n	%{lib_name}-devel
+%package -n	%develname
 Summary:	Development files for GGZ game clients library
 Group:		Development/Other
 Requires:	libggz-devel = %{libggz_version}
 Requires: 	%{modlibname} = %{version}
 Requires:       %{corelibname} = %{version}
-Provides: 	%{name}-devel
+Provides: 	%{name}-devel = %version-%release
+Obsoletes: %mklibname -d %name 9
 
-%description -n	%{lib_name}-devel
+%description -n	%develname
 The GGZ client libraries are necessary for running and/or developing
 GGZ Gaming Zone clients and games.
 
@@ -85,10 +87,13 @@ building GGZ Gaming Zone clients or game modules.
 %make
 
 %install
-rm -rf %{buildroot}
+rm -rf %{buildroot} ggz*.lang
 %makeinstall_std
 
-%find_lang %{name}
+%find_lang ggzcore
+%find_lang ggz-config
+cat ggz-config.lang >> ggzcore.lang
+
 # owns various directories
 mkdir -p %{buildroot}%{_libdir}/ggz \
 	 %{buildroot}%{_datadir}/ggz/ggz-config \
@@ -106,15 +111,17 @@ rm -rf %{buildroot}
 %post -n %{corelibname} -p /sbin/ldconfig
 %postun -n %{corelibname} -p /sbin/ldconfig
 
+%post
+touch %{_sysconfdir}/ggz.modules
 
 
-
-%files -f %{name}.lang
+%files -f ggzcore.lang
 %defattr(-,root,root)
 %doc AUTHORS COPYING NEWS README QuickStart.GGZ README.GGZ
-%config(noreplace) %{_sysconfdir}/ggz.modules
+%ghost %{_sysconfdir}/ggz.modules
 %{_sysconfdir}/xdg/menus/ggz.menu
 %{_sysconfdir}/xdg/menus/applications-merged/ggz.merge.menu
+%{_bindir}/ggz-config
 %{_bindir}/ggz-wrapper
 %{_bindir}/ggz
 %dir %{_libexecdir}/ggz
@@ -122,10 +129,8 @@ rm -rf %{buildroot}
 %dir %{_datadir}/ggz
 %dir %{_datadir}/ggz/ggz-config
 %dir %{_datadir}/ggz/pixmaps
-%dir %{_datadir}/locale/de/LC_MESSAGES/*
 %{_datadir}/desktop-directories/ggz-games.directory
 %{_datadir}/desktop-directories/ggz.directory
-%{_datadir}/locale/de/LC_MESSAGES/ggz-config.mo
 %{_mandir}/man1/*
 %{_mandir}/man5/*
 %{_mandir}/man6/*
@@ -143,11 +148,10 @@ rm -rf %{buildroot}
 %{_libdir}/libggzcore.so.%{core_major}
 %{_libdir}/libggzcore.so.%{core_major}.*
 
-%files -n %{lib_name}-devel
+%files -n %develname
 %defattr(-,root,root)
 %doc COPYING ChangeLog
 %{_includedir}/*
-%{_bindir}/ggz-config
 %{_libdir}/lib*.a
 %{_libdir}/lib*.la
 %{_libdir}/lib*.so
