@@ -1,5 +1,5 @@
 %define version 0.0.14.1
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define mod_major 4
 %define core_major 9
@@ -36,7 +36,7 @@ maintain installed game modules.
 
 %package -n	%{modlibname}
 Summary:	GGZ Library containing functions interfacing game server and GGZ
-Group:		Games/Other
+Group:		System/Libraries
 Requires:	%{name} = %{version}
 Provides:	libggzmod = %{version}
 
@@ -50,7 +50,7 @@ interfacing a game server and GGZ.
 
 %package -n	%{corelibname}
 Summary:	GGZ Library needed by GGZ clients
-Group:		Games/Other
+Group:		System/Libraries
 Requires:	%{name} = %{version}
 Provides:	libggzcore = %{version}
 
@@ -64,7 +64,7 @@ by all GGZ clients.
 
 %package -n	%develname
 Summary:	Development files for GGZ game clients library
-Group:		Development/Other
+Group:		Development/C
 Requires:	libggz-devel = %{libggz_version}
 Requires: 	%{modlibname} = %{version}
 Requires:       %{corelibname} = %{version}
