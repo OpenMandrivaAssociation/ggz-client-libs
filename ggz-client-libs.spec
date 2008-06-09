@@ -105,11 +105,19 @@ touch %{buildroot}%{_sysconfdir}/ggz.modules
 %clean
 rm -rf %{buildroot}
 
+%if %mdkversion < 200900
 %post -n %{modlibname} -p /sbin/ldconfig
+%endif
+%if %mdkversion < 200900
 %postun -n %{modlibname} -p /sbin/ldconfig
+%endif
 
+%if %mdkversion < 200900
 %post -n %{corelibname} -p /sbin/ldconfig
+%endif
+%if %mdkversion < 200900
 %postun -n %{corelibname} -p /sbin/ldconfig
+%endif
 
 %post
 touch %{_sysconfdir}/ggz.modules
