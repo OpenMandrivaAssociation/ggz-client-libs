@@ -83,7 +83,7 @@ building GGZ Gaming Zone clients or game modules.
 %setup -q
 
 %build
-%configure --with-libggz-libraries=%{_libdir}
+%configure2_5x --with-libggz-libraries=%{_libdir}
 %make
 
 %install
