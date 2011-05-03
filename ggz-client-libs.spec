@@ -1,5 +1,5 @@
 %define version 0.0.14.1
-%define release %mkrel 7
+%define release %mkrel 8
 
 %define mod_major 4
 %define core_major 9
