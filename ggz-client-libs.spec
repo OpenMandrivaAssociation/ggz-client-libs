@@ -7,7 +7,7 @@
 Summary:	GGZ Client Libraries
 Name:		ggz-client-libs
 Version:	0.0.14.1
-Release:	11
+Release:	12
 License:	GPLv2
 Group:		Games/Other
 Url:		http://ggzgamingzone.org/
