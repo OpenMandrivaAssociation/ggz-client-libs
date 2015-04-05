@@ -87,7 +87,6 @@ touch %{_sysconfdir}/ggz.modules
 %{_sysconfdir}/xdg/menus/ggz.menu
 %{_sysconfdir}/xdg/menus/applications-merged/ggz.merge.menu
 %{_bindir}/ggz
-%dir %{_libexecdir}/ggz
 %dir %{_datadir}/ggz
 %dir %{_datadir}/ggz/pixmaps
 %{_datadir}/desktop-directories/ggz-games.directory
