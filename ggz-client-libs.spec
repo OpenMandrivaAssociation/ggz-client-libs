@@ -106,7 +106,7 @@ touch %{_sysconfdir}/ggz.modules
 %{_bindir}/ggz-config
 %{_bindir}/ggz-wrapper
 %dir %{_datadir}/ggz/ggz-config
-%dir %{_libexecdir}/ggz/ggzwrap
+%{_libdir}/ggz/ggzwrap
 %{_includedir}/*
 %{_libdir}/lib*.so
 %{_mandir}/man3/*
