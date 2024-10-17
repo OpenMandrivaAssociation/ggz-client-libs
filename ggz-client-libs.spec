@@ -10,7 +10,7 @@ Version:	0.0.14.1
 Release:	15
 License:	GPLv2
 Group:		Games/Other
-Url:		http://ggzgamingzone.org/
+Url:		https://ggzgamingzone.org/
 Source0:	http://ftp.ggzgamingzone.org/pub/ggz/%{version}/%{name}-%{version}.tar.bz2
 
 BuildRequires:	libggz-devel
